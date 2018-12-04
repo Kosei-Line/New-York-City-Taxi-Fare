@@ -74,7 +74,7 @@ def sphere_dist(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon):
     return 2 * R_earth * np.arcsin(np.sqrt(a))
 def Load_Dataset():
     #csvからデータを読み取る
-    data = pd.read_csv('train.csv', nrows=1000)
+    data = pd.read_csv('train.csv', nrows=1000000)
     #必要なデータだけ取り出す
     data = data[['pickup_datetime', 'pickup_longitude', 'pickup_latitude',
     'dropoff_longitude', 'dropoff_latitude', 'fare_amount']]
@@ -108,8 +108,6 @@ def Load_Dataset():
     data.loc[(data['pickup_datetime_month'] >8) & (data['pickup_datetime_year'] == 2012), 'raised'] = 1    #データを行列に変換
     T = data['fare_amount']
     X = data.drop(['fare_amount'], axis=1)
-    print(X.columns)
-    pria
     X = X.as_matrix().astype(np.float32)
     T = T.as_matrix().astype(np.float32)
     T = np.reshape(T,[-1, 1])
